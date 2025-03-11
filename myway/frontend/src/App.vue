@@ -2,16 +2,19 @@
   <div id="app">
     <MainNavbar />
     <router-view/>
+    <FooterSection />
   </div>
 </template>
 
 <script>
 import MainNavbar from './components/MainNavbar.vue'
+import FooterSection from './components/FooterSection.vue';
 
 export default {
   name: 'App',
   components: {
-    MainNavbar
+    MainNavbar,
+    FooterSection,
   }
 }
 </script>
