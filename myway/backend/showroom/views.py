@@ -1,7 +1,7 @@
-from django.shortcuts import render
+from rest_framework import viewsets
+from .models import Car
+from .serializers import CarSerializer
 
-# Create your views here.
-from django.http import HttpResponse
-
-def index(request):
-    return HttpResponse("Welcome to the MyWay showroom!")
+class CarViewSet(viewsets.ModelViewSet):
+    queryset = Car.objects.all()
+    serializer_class = CarSerializer
