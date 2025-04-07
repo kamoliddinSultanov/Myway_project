@@ -34,7 +34,7 @@ if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 '''
 from django.contrib import admin
-from django.urls import path, include,re_path
+from django.urls import path, include, re_path
 from django.conf import settings
 from django.conf.urls.static import static
 from django.views.generic.base import RedirectView
@@ -42,21 +42,15 @@ from django.views.static import serve
 from django.views.generic import TemplateView
 
 
-'''urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('api/', include('showroom.urls')),
-    #re_path(r'^.*$', TemplateView.as_view(template_name="vue/index.html")),
-    #re_path(r'^.*$', TemplateView.as_view(template_name="vue/index.html")),
-    #re_path(r'^.*$', VueTemplateView.as_view()),
-    #re_path(r'^$', RedirectView.as_view(url='/static/vue/index.html', permanent=False)),
-    #re_path(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
-]'''
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('showroom.urls')),
     re_path(r'^.*$', TemplateView.as_view(template_name="vue/index.html")),  # Добавляем маршрут для корневого URL
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
 
 # Настройка маршрутов для медиафайлов
-#if settings.DEBUG:
-#    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    #urlpatterns += static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS[0])
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+#+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

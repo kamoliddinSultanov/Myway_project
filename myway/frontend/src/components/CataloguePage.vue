@@ -6,7 +6,10 @@
   <div>
     <h1>Cars</h1>
     <ul>
-      <li v-for="car in cars" :key="car.id">{{ car.title }} - {{ car.brand }} - {{ car.model }} - ${{ car.price }}</li>
+      <li v-for="car in cars" :key="car.id">
+        {{ car.title }} - {{ car.brand }} - {{ car.model }} - ${{ car.price }}
+        <router-link :to="{ name: 'CarDetail', params: { id: car.id } }">View more</router-link>
+      </li>
     </ul>
   </div>
 </template>
