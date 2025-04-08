@@ -6,8 +6,9 @@
   <div>
     <h1>Cars</h1>
     <ul>
-      <li v-for="car in cars" :key="car.id">
-        {{ car.title }} - {{ car.brand }} - {{ car.model }} - ${{ car.price }}
+      <li v-for="car in cars" :key="car.id" style="display: flex;justify-content: center;align-items: center;">
+        <img :src="car.image" alt="Car Image" width="100px" height="50px"/>
+        {{ car.title }} - {{ car.brand }} - {{ car.model }} - ${{ car.price }} -
         <router-link :to="{ name: 'CarDetail', params: { id: car.id } }">View more</router-link>
       </li>
     </ul>

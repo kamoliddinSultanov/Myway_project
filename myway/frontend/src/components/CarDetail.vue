@@ -1,9 +1,7 @@
   <template>
     <div class="car-detail">
       <h1>{{ car.title }}</h1>
-      <!-- <img :src="car.image" alt="Car image" /> -->
-      <!-- <img :src="car.image" alt="Car image" v-if="car.image" /> -->
-      <img src="{{ car.image.url }}" alt="Car Image">
+      <img :src="car.image" alt="Car Image" />
       <p><strong>Brand:</strong> {{ car.brand }}</p>
       <p><strong>Model:</strong> {{ car.model }}</p>
       <p><strong>Price:</strong> ${{ car.price }}</p>

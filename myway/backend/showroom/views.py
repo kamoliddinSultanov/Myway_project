@@ -17,6 +17,7 @@ def car_detail(request, pk):
         "model": car.model,
         "price": car.price,
         "description": car.description,
-        "image": car.image.url,
+        #"image": car.image.url,
+        "image": request.build_absolute_uri(car.image.url) if car.image else None,
     }
     return JsonResponse(car_data)

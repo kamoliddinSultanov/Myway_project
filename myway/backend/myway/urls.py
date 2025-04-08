@@ -41,11 +41,13 @@ from django.views.generic.base import RedirectView
 from django.views.static import serve
 from django.views.generic import TemplateView
 
+from django.views.static import serve
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('showroom.urls')),
-    re_path(r'^.*$', TemplateView.as_view(template_name="vue/index.html")),  # Добавляем маршрут для корневого URL
+    #re_path(r'^.*$', TemplateView.as_view(template_name="vue/index.html")),  # Добавляем маршрут для корневого URL
 ]
 
 # Настройка маршрутов для медиафайлов
@@ -54,3 +56,7 @@ if settings.DEBUG:
     #urlpatterns += static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS[0])
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 #+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+urlpatterns += [
+    re_path(r'^.*$', TemplateView.as_view(template_name="vue/index.html")),
+]
