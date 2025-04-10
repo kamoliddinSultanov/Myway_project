@@ -13,17 +13,23 @@
   import axios from 'axios';
   export default {
     name: 'CarDetail',
+    props: {
+      id: {
+        type: String,
+        required: true
+      }
+    },
     data() {
       return {
         car: {}
       };
     },
     created() {
-      const carId = this.$route.params.id;
+      //const carId = this.$route.params.id;
+      const carId = this.id;
       axios.get(`http://localhost:8000/api/cars/${carId}/`)
         .then(response => {
           this.car = response.data;
-          console.log(this.car.image);
         })
         .catch(error => {
           console.error('There was an error fetching the car details!', error);

@@ -23,7 +23,8 @@ const routes = [
   {
     path: '/cars/:id',
     name: 'CarDetail',
-    component: CarDetail
+    component: CarDetail,
+    props: true,
   }
 ]
 
