@@ -44,10 +44,18 @@ from django.views.generic import TemplateView
 from django.views.static import serve
 
 
+from showroom.views import RegisterView, LoginView, LogoutView, UserView
+from showroom.views import GetCSRFToken
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('showroom.urls')),
     #re_path(r'^.*$', TemplateView.as_view(template_name="vue/index.html")),  # Добавляем маршрут для корневого URL
+    path('api/csrf-token/', GetCSRFToken.as_view(), name='csrf_token'),
+    path('api/register/', RegisterView.as_view(), name='register'),
+    path('api/login/', LoginView.as_view(), name='login'),
+    path('api/logout/', LogoutView.as_view(), name='logout'),
+    path('api/user/', UserView.as_view(), name='user'),
 ]
 
 # Настройка маршрутов для медиафайлов
