@@ -34,7 +34,9 @@ const actions = {
   async login({ commit, dispatch }, credentials) {
     try {
       await dispatch('getCSRFToken');
-      const response = await axios.post('/api/login/', credentials);
+      const response = await axios.post('/api/login/', credentials, {
+          withCredentials: true
+      });
       commit('setUser', response.data);
       return true;
     } catch (error) {
@@ -45,7 +47,9 @@ const actions = {
   async logout({ commit, dispatch }) {
     try {
       await dispatch('getCSRFToken');
-      await axios.post('/api/logout/');
+      await axios.post('/api/logout/', null, {
+          withCredentials: true
+      });
       commit('setUser', null);
       return true;
     } catch (error) {
@@ -54,15 +58,20 @@ const actions = {
     }
   },
   async checkAuth({ commit }) {
-    try {
-      const response = await axios.get('/api/user/');
-      commit('setUser', response.data);
-      return true;
-    } catch (error) {
-      commit('setUser', null);
-      return false;
+      try {
+        const response = await axios.get('/api/user/', {
+          withCredentials: true, // ← важно!
+          headers: {
+            'Cache-Control': 'no-cache', // ← отключаем кэш
+          },
+        });
+        commit('setUser', response.data);
+        return true;
+      } catch (error) {
+        commit('setUser', null);
+        return false;
+      }
     }
-  },
 };
 
 const getters = {
