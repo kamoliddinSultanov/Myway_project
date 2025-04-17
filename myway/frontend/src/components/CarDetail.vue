@@ -200,17 +200,29 @@ export default {
     },
     async submitOrder() {
       try {
+        const payload = {
+          ...this.orderForm,
+          car: {
+            title: this.car.title,
+            brand: this.car.brand,
+            model: this.car.model,
+            price: this.car.price,
+            description: this.car.description
+          }
+        };
+
         await axios.post(
           'http://localhost:8000/api/request-order/',
-          this.orderForm,
+          payload,
           { withCredentials: true }
         );
+
         alert('Order submitted successfully!');
         this.showForm = false;
         this.orderForm = { name: '', email: '', phone: '' };
+
       } catch (error) {
         if (error.response?.status === 401) {
-          // Если сессия устарела
           this.isAuthenticated = false;
           this.showForm = false;
           this.$router.push('/login');
@@ -218,7 +230,8 @@ export default {
           alert('Error: ' + (error.response?.data?.message || 'Order submission failed'));
         }
       }
-    },
+    }
+
   },
 };
 </script>

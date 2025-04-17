@@ -35,6 +35,20 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 import json
+#####
+
+
+
+
+import smtplib
+import string
+import random
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+from django.conf import settings
+
+
+
 
 class CarViewSet(viewsets.ModelViewSet):
     queryset = Car.objects.all()
@@ -199,23 +213,104 @@ def get_csrf_token(request):
 def check_auth(request):
     return JsonResponse({'isAuthenticated': True})
 
-@csrf_exempt  # Временно отключаем CSRF для тестирования
+# @csrf_exempt  # Временно отключаем CSRF для тестирования
+# @login_required
+# def request_order(request):
+#     if request.method == 'POST':
+#         try:
+#             data = json.loads(request.body)
+#             # Здесь можно добавить обработку данных заказа
+#             # Например, сохранение в базу данных
+#             return JsonResponse({
+#                 'status': 'success',
+#                 'message': 'Order received successfully'
+#             })
+#         except Exception as e:
+#             return JsonResponse({
+#                 'status': 'error',
+#                 'message': str(e)
+#             }, status=400)
+#     return JsonResponse({
+#         'status': 'error',
+#         'message': 'Only POST requests allowed'
+#     }, status=405)
+
+
+
+
+@csrf_exempt
 @login_required
 def request_order(request):
     if request.method == 'POST':
         try:
             data = json.loads(request.body)
-            # Здесь можно добавить обработку данных заказа
-            # Например, сохранение в базу данных
+            name = data.get('name')
+            email = data.get('email')
+            phone = data.get('phone')
+
+            # Генерация order ID
+            order_id = ''.join(random.choices(string.digits, k=4)) + random.choice(string.ascii_uppercase)
+
+            # Детали машины (можно передавать с фронта или вытягивать из БД, если нужен car_id)
+            car_details = data.get('car', {})
+            car_title = car_details.get('title', 'Unknown Car')
+            car_brand = car_details.get('brand', '')
+            car_model = car_details.get('model', '')
+            car_price = car_details.get('price', '')
+            car_description = car_details.get('description', '')
+
+            # Настройка писем
+            smtp_server = "smtp.yandex.com"
+            smtp_port = 587
+            smtp_user = "myway.test@yandex.com"
+            smtp_password = "ckwsbxbedadgqnyg"  # Пароль приложения!
+
+            # Сообщение клиенту
+            msg1 = MIMEText(f"Your order is accepted.\nA sales manager will contact you soon.\n\nOrder ID: {order_id}")
+            msg1['Subject'] = "Order Confirmation"
+            msg1['From'] = f"No Reply <{smtp_user}>"
+            msg1['To'] = email
+
+            # Сообщение в showroom
+            admin_body = f"""
+New order received:
+
+Name: {name}
+Email: {email}
+Phone: {phone}
+
+Car Details:
+Title: {car_title}
+Brand: {car_brand}
+Model: {car_model}
+Price: ${car_price}
+Description: {car_description}
+
+Order ID: {order_id}
+"""
+            msg2 = MIMEText(admin_body)
+            msg2['Subject'] = f"New Order - {order_id}"
+            msg2['From'] = f"No Reply <{smtp_user}>"
+            msg2['To'] = "mywayshowroom3@gmail.com"
+
+            # Отправка писем
+            with smtplib.SMTP(smtp_server, smtp_port) as server:
+                server.starttls()
+                server.login(smtp_user, smtp_password)
+                server.sendmail(smtp_user, email, msg1.as_string())
+                server.sendmail(smtp_user, "mywayshowroom3@gmail.com", msg2.as_string())
+
             return JsonResponse({
                 'status': 'success',
-                'message': 'Order received successfully'
+                'order_id': order_id,
+                'message': 'Order received and emails sent'
             })
         except Exception as e:
             return JsonResponse({
                 'status': 'error',
                 'message': str(e)
             }, status=400)
+
     return JsonResponse({
         'status': 'error',
         'message': 'Only POST requests allowed'
