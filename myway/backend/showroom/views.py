@@ -23,6 +23,18 @@ from django.utils.decorators import method_decorator
 from rest_framework.views import APIView
 from .auth import CustomSessionAuthentication
 
+from django.middleware.csrf import get_token
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+
+from django.http import JsonResponse
+
+
+
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.decorators import login_required
+import json
 
 class CarViewSet(viewsets.ModelViewSet):
     queryset = Car.objects.all()
@@ -171,3 +183,40 @@ class LogoutView(APIView):
     def post(self, request):
         logout(request)
         return Response({"message": "Successfully logged out"})
+
+
+
+@api_view(['GET'])
+def get_csrf_token(request):
+    """
+    Возвращает CSRF токен для фронтенда.
+    """
+    csrf_token = get_token(request)
+    return Response({'csrfToken': csrf_token})
+
+
+@login_required
+def check_auth(request):
+    return JsonResponse({'isAuthenticated': True})
+
+@csrf_exempt  # Временно отключаем CSRF для тестирования
+@login_required
+def request_order(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            # Здесь можно добавить обработку данных заказа
+            # Например, сохранение в базу данных
+            return JsonResponse({
+                'status': 'success',
+                'message': 'Order received successfully'
+            })
+        except Exception as e:
+            return JsonResponse({
+                'status': 'error',
+                'message': str(e)
+            }, status=400)
+    return JsonResponse({
+        'status': 'error',
+        'message': 'Only POST requests allowed'
+    }, status=405)

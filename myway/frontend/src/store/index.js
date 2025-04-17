@@ -1,92 +1,78 @@
-import { createStore } from 'vuex'
-import axios from 'axios'
+import { createStore } from 'vuex';
+import axios from 'axios'; // Убедитесь, что axios импортирован
 
-// Базовая конфигурация axios
-axios.defaults.baseURL = 'http://localhost:8000'
-axios.defaults.withCredentials = true
+const state = {
+  user: null,
+  isAuthenticated: false,
+};
 
-// Перехватчик для установки CSRF токена
-axios.interceptors.request.use(
-  config => {
-    const csrfToken = document.cookie
-      .split('; ')
-      .find(row => row.startsWith('csrftoken='))
-      ?.split('=')[1]
-    
-    if (csrfToken) {
-      config.headers['X-CSRFToken'] = csrfToken
-    }
-    return config
+const mutations = {
+  setUser(state, user) {
+    state.user = user;
+    state.isAuthenticated = !!user;
   },
-  error => {
-    return Promise.reject(error)
-  }
-)
+};
+
+const actions = {
+  async getCSRFToken() {
+    try {
+      await axios.get('/api/csrf-token/');
+    } catch (error) {
+      console.error('Error fetching CSRF token:', error);
+    }
+  },
+  async register({ commit }, userData) {
+      try {
+        const response = await axios.post('http://localhost:8000/api/register/', userData)
+        commit('SET_USER', response.data.user)
+        return { success: true }
+      } catch (error) {
+        commit('SET_AUTH_ERROR', error.response.data)
+        return { success: false, error: error.response.data }
+      }
+  },
+  async login({ commit, dispatch }, credentials) {
+    try {
+      await dispatch('getCSRFToken');
+      const response = await axios.post('/api/login/', credentials);
+      commit('setUser', response.data);
+      return true;
+    } catch (error) {
+      console.error('Login error:', error);
+      throw error;
+    }
+  },
+  async logout({ commit, dispatch }) {
+    try {
+      await dispatch('getCSRFToken');
+      await axios.post('/api/logout/');
+      commit('setUser', null);
+      return true;
+    } catch (error) {
+      console.error('Logout error:', error);
+      throw error;
+    }
+  },
+  async checkAuth({ commit }) {
+    try {
+      const response = await axios.get('/api/user/');
+      commit('setUser', response.data);
+      return true;
+    } catch (error) {
+      commit('setUser', null);
+      return false;
+    }
+  },
+};
+
+const getters = {
+  isAuthenticated: (state) => state.isAuthenticated,
+  user: (state) => state.user,
+};
 
 export default createStore({
-  state: {
-    user: null,
-    isAuthenticated: false
-  },
-  mutations: {
-    setUser(state, user) {
-      state.user = user
-      state.isAuthenticated = !!user
-    }
-  },
-  actions: {
-    async getCSRFToken() {
-      try {
-        await axios.get('/api/csrf-token/')
-      } catch (error) {
-        console.error('Error fetching CSRF token:', error)
-      }
-    },
-    async register(_, userData) {
-      try {
-        await this.dispatch('getCSRFToken')
-        await axios.post('/api/register/', userData)
-        return true
-      } catch (error) {
-        console.error('Registration error:', error)
-        throw error
-      }
-    },
-    async login({ commit }, credentials) {
-      try {
-        await this.dispatch('getCSRFToken')
-        const response = await axios.post('/api/login/', credentials)
-        commit('setUser', response.data)
-        return true
-      } catch (error) {
-        console.error('Login error:', error)
-        throw error
-      }
-    },
-    async logout({ commit }) {
-      try {
-        await this.dispatch('getCSRFToken')
-        await axios.post('/api/logout/')
-        commit('setUser', null)
-        return true
-      } catch (error) {
-        console.error('Logout error:', error)
-        throw error
-      }
-    },
-    async checkAuth({ commit }) {
-      try {
-        const response = await axios.get('/api/user/')
-        commit('setUser', response.data)
-        return true
-      } catch (error) {
-        commit('setUser', null)
-        return false
-      }
-    }
-  },
-  getters: {
-    isAuthenticated: state => state.isAuthenticated,
-    user: state => state.user
-  }
-})
+  state,
+  mutations,
+  actions,
+  getters,
+});

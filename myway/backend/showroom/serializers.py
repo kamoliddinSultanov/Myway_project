@@ -48,3 +48,21 @@ class UserSerializer(serializers.ModelSerializer):
             password=validated_data['password']
         )
         return user
+
+
+class OrderSerializer(serializers.Serializer):
+    name = serializers.CharField()
+    email = serializers.EmailField()
+    phone = serializers.CharField()
+
+# views.py
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+
+@api_view(['POST'])
+def request_order(request):
+    serializer = OrderSerializer(data=request.data)
+    if serializer.is_valid():
+        # Обработка данных
+        return Response({'status': 'success'})
+    return Response(serializer.errors, status=400)
