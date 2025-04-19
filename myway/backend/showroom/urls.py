@@ -21,5 +21,5 @@ urlpatterns = [
     path('api/csrf-token/', get_csrf_token, name='csrf_token'),
     path('authenticated/', views.check_auth),  # Проверка авторизации
     path('request-order/', views.request_order),
-    #path('cars/<int:pk>/', views.car_detail, name='car_detail'),
+    path('cars/<int:pk>/', views.car_detail, name='car_detail'),
 ]

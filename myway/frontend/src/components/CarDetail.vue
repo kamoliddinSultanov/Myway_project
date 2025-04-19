@@ -1,8 +1,6 @@
 <template>
   <div class="max-w-7xl mx-auto px-4 py-8" v-if="car">
-    <!-- Основная секция с машиной -->
     <div class="flex flex-col lg:flex-row gap-8 mb-12">
-      <!-- Картинка слева -->
       <div class="lg:w-1/2">
         <img
           :src="getImageUrl(car.image)"
@@ -11,7 +9,6 @@
         />
       </div>
 
-      <!-- Детали справа -->
       <div class="lg:w-1/2">
         <div class="bg-white p-8 rounded-xl shadow-lg">
           <h1 class="text-4xl font-bold text-gray-900 mb-4">{{ car.title }}</h1>
@@ -41,16 +38,14 @@
       </div>
     </div>
 
-    <!-- Описание -->
     <div class="bg-white p-8 rounded-xl shadow-lg mb-8">
       <h2 class="text-2xl font-semibold text-gray-900 mb-4">Description</h2>
       <p class="text-gray-700 leading-relaxed">{{ car.description }}</p>
     </div>
 
-    <!-- Модальное окно для заказа (только для авторизованных) -->
     <div v-if="isAuthenticated && showForm" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
       <div class="bg-white rounded-xl shadow-xl w-full max-w-md">
-        <!-- Заголовок и кнопка закрытия -->
+
         <div class="flex justify-between items-center border-b p-4">
           <h3 class="text-xl font-semibold">Order Request</h3>
           <button @click="showForm = false" class="text-gray-500 hover:text-gray-700">
@@ -60,7 +55,6 @@
           </button>
         </div>
 
-        <!-- Форма -->
         <form @submit.prevent="submitOrder" class="p-6 space-y-4">
           <div>
             <label class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
@@ -101,7 +95,6 @@
       </div>
     </div>
 
-    <!-- Уведомление о необходимости авторизации -->
     <div v-if="authModalVisible" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
       <div class="bg-white rounded-xl shadow-xl w-full max-w-md p-6">
         <h3 class="text-xl font-semibold mb-4">Authorization Required</h3>
@@ -124,7 +117,6 @@
     </div>
   </div>
 
-  <!-- Лоадер -->
   <div v-else class="flex justify-center items-center h-64">
     <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
   </div>
@@ -139,7 +131,7 @@ export default {
       car: null,
       isAuthenticated: false,
       showForm: false,
-      authModalVisible: false, // Для показа модалки авторизации
+      authModalVisible: false,
       orderForm: {
         name: '',
         email: '',
@@ -181,15 +173,12 @@ export default {
       }
     },
     async handleRequestOrder() {
-      // Всегда проверяем актуальный статус перед действием
       await this.checkAuth();
 
       if (this.isAuthenticated) {
-        // Показываем форму заказа
         this.showForm = true;
         this.authModalVisible = false;
       } else {
-        // Показываем модалку с предложением авторизоваться
         this.authModalVisible = true;
         this.showForm = false;
       }
@@ -237,7 +226,6 @@ export default {
 </script>
 
 <style scoped>
-/* Плавная анимация для модальных окон */
 .modal-enter-active, .modal-leave-active {
   transition: opacity 0.3s ease;
 }
@@ -245,7 +233,6 @@ export default {
   opacity: 0;
 }
 
-/* Кастомные стили для скролла */
 ::-webkit-scrollbar {
   width: 8px;
 }

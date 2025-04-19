@@ -1,9 +1,7 @@
 
 <template>
 	<section>
-        <!-- Container -->
         <div class="mx-auto w-full max-w-7xl px-5 py-16 md:px-10 md:py-20">
-            <!-- Component -->
             <div class="flex flex-col items-start gap-8 sm:gap-20 md:flex-row md:items-center">
                 <div class="md:w-1/2">
                     <h2 class="mb-4 max-w-3xl text-3xl font-bold md:text-5xl">

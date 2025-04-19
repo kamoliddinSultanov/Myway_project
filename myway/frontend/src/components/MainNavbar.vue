@@ -36,7 +36,6 @@ export default {
     const store = useStore()
     const router = useRouter()
 
-    // Используем computed для реактивных свойств
     const isAuth = computed(() => store.state.isAuthenticated)
     const currentUser = computed(() => store.state.user?.username)
 
