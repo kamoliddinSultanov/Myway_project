@@ -1,4 +1,3 @@
-// tests/unit/BestSellers.spec.js
 import { mount } from '@vue/test-utils'
 import BestSellers from '@/components/BestSellers.vue'
 
@@ -24,7 +23,6 @@ describe('BestSellers.vue', () => {
     const images = wrapper.findAll('img')
     expect(images).toHaveLength(5)
     
-    // Check if alt texts are correct
     expect(images[0].attributes('alt')).toBe('Logo 1')
     expect(images[1].attributes('alt')).toBe('Logo 2')
     expect(images[2].attributes('alt')).toBe('Logo 3')

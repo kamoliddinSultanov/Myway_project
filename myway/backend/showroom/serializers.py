@@ -1,10 +1,11 @@
 from rest_framework import serializers
 from .models import Car
 
-
-from rest_framework import serializers
 from django.contrib.auth.models import User
 from django.contrib.auth.password_validation import validate_password
+
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 
 class CarSerializer(serializers.ModelSerializer):
     image = serializers.SerializerMethodField()
@@ -21,7 +22,7 @@ class CarSerializer(serializers.ModelSerializer):
         request = self.context.get('request')
         if request:
             return request.build_absolute_uri(url)
-        return url  # Если request нет, возвращаем как есть
+        return url
 
 
 ####
@@ -55,14 +56,12 @@ class OrderSerializer(serializers.Serializer):
     email = serializers.EmailField()
     phone = serializers.CharField()
 
-# views.py
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
+
+
 
 @api_view(['POST'])
 def request_order(request):
     serializer = OrderSerializer(data=request.data)
     if serializer.is_valid():
-        # Обработка данных
         return Response({'status': 'success'})
     return Response(serializer.errors, status=400)

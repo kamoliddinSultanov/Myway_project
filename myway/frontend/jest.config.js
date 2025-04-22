@@ -21,7 +21,7 @@ module.exports = {
   },
 
   transformIgnorePatterns: [
-    'node_modules/(?!axios)/' // Исключаем axios из игнорирования
+    'node_modules/(?!axios)/'
   ],
 
   moduleFileExtensions: ['js', 'json', 'vue'],

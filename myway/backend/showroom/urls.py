@@ -19,7 +19,7 @@ urlpatterns = [
     path('', include(router.urls)),
     path('search/', search_cars, name='search_cars'),
     path('api/csrf-token/', get_csrf_token, name='csrf_token'),
-    path('authenticated/', views.check_auth),  # Проверка авторизации
+    path('authenticated/', views.check_auth),
     path('request-order/', views.request_order),
     path('cars/<int:pk>/', views.car_detail, name='car_detail'),
 ]

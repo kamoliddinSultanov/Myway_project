@@ -16,6 +16,6 @@ class CustomSessionAuthentication(SessionAuthentication):
 @login_required
 def is_authenticated(request):
     """
-    Проверка, авторизован ли пользователь.
+    check whether user is authorized
     """
     return Response({'isAuthenticated': True})

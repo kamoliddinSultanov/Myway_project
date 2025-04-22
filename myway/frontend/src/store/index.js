@@ -1,5 +1,5 @@
 import { createStore } from 'vuex';
-import axios from 'axios'; // Убедитесь, что axios импортирован
+import axios from 'axios';
 
 const state = {
   user: null,
@@ -60,9 +60,9 @@ const actions = {
   async checkAuth({ commit }) {
       try {
         const response = await axios.get('/api/user/', {
-          withCredentials: true, // ← важно!
+          withCredentials: true,
           headers: {
-            'Cache-Control': 'no-cache', // ← отключаем кэш
+            'Cache-Control': 'no-cache',
           },
         });
         commit('setUser', response.data);

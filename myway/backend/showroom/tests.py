@@ -14,7 +14,6 @@ from rest_framework import status
 class CarTests(TestCase):
     def setUp(self):
         self.client = APIClient()
-        # Создаем тестовый автомобиль без вызова Elasticsearch
         image = SimpleUploadedFile("test.jpg", b"file_content", content_type="image/jpeg")
         self.car = Car.objects.create(
             title="Test Car",
@@ -115,20 +114,18 @@ class OrderTests(TestCase):
         self.client.force_authenticate(user=self.user)
 
     def test_request_order_authenticated(self):
-        """Просто проверяем, что авторизованный доступ работает"""
         response = self.client.get('/api/request-order/')
         self.assertIn(response.status_code, [200, 302, 405])
 
     @patch('smtplib.SMTP')
     def test_request_order_success_simplified(self, mock_smtp):
-        """Упрощенный тест успешного запроса"""
         try:
             response = self.client.post('/api/request-order/', {'test': 'data'})
             self.assertIn(response.status_code, [200, 302])
         except Exception:
-            self.assertTrue(True)  # Просто пропускаем если возникает ошибка
+            self.assertTrue(True)
 
     def test_request_order_returns_something(self):
-        """Проверяем что endpoint вообще что-то возвращает"""
+        """endpont check"""
         response = self.client.post('/api/request-order/')
         self.assertIsNotNone(response.content)

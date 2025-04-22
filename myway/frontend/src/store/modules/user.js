@@ -22,7 +22,7 @@ const actions = {
   },
   async login({ commit, dispatch }, credentials) {
     try {
-      await dispatch('getCSRFToken'); // Используем dispatch из контекста
+      await dispatch('getCSRFToken');
       const response = await axios.post('/api/login/', credentials);
       commit('setUser', response.data);
       return true;

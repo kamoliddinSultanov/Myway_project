@@ -9,9 +9,9 @@ module.exports = defineConfig({
         changeOrigin: true,
       },
       '/elasticsearch': {
-        target: 'http://localhost:9200', // Прокси на сервер Elasticsearch
+        target: 'http://localhost:9200',
         changeOrigin: true,
-        pathRewrite: { '^/elasticsearch': '' } // Уберите префикс /elasticsearch из пути
+        pathRewrite: { '^/elasticsearch': '' }
       },
     },
   },

@@ -1,4 +1,3 @@
-// tests/unit/CataloguePage.spec.js
 import { mount } from '@vue/test-utils'
 import CataloguePage from '@/components/CataloguePage.vue'
 import axios from 'axios'

@@ -64,12 +64,10 @@ describe('ImageCarousel.vue', () => {
   })
 
   test('корректно обрабатывает переход через границы', async () => {
-    // Проверка перехода вперед на последнем слайде
     wrapper.setData({ currentIndex: 2 })
     await wrapper.vm.nextSlide()
     expect(wrapper.vm.currentIndex).toBe(0)
 
-    // Проверка перехода назад на первом слайде
     wrapper.setData({ currentIndex: 0 })
     await wrapper.vm.prevSlide()
     expect(wrapper.vm.currentIndex).toBe(2)

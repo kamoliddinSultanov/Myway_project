@@ -3,7 +3,7 @@
     <ul class="nav-left">
       <li>
         <router-link to="/">
-          <img src="@/assets/logocar.svg" alt="Logo" class="logo" />
+          <img src="@/assets/myway_logo.svg" alt="Logo" class="logo" />
         </router-link>
       </li>
       <li><router-link to="/">Home</router-link></li>
@@ -59,7 +59,7 @@ export default {
 
 <style scoped>
 .navbar {
-  background-color: #333;
+  background-color: #000;
   overflow: hidden;
   display: flex;
   justify-content: space-between;
@@ -91,8 +91,8 @@ export default {
 }
 
 .logo {
-  width: 110px;
-  height: 15px;
+  width: 100px;
+  height: 35px;
 }
 
 .auth-link {

@@ -7,9 +7,9 @@ import axios from 'axios';
 
 store.dispatch('checkAuth');
 
-// Настройка Axios
+
 axios.defaults.baseURL = 'http://localhost:8000';
-axios.defaults.withCredentials = true; // Включаем передачу cookies
+axios.defaults.withCredentials = true;
 
 axios.interceptors.request.use(
   (config) => {
@@ -26,12 +26,8 @@ axios.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-
-
 //createApp(App).use(router).use(store).mount('#app')
 const app = createApp(App);
-
-app.use(store); // Подключаем Vuex
-app.use(router); // Подключаем маршрутизацию
-
+app.use(store); 
+app.use(router); 
 app.mount('#app');

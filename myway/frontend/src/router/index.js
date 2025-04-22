@@ -3,7 +3,6 @@ import Home from '../components/HomePage.vue'
 import Catalogue from '../components/CataloguePage.vue'
 import AboutUs from '../components/AboutUsPage.vue'
 import CarDetail from '../components/CarDetail.vue';
-
 import Login from '../components/LoginPage.vue'
 import Register from '../components/RegisterPage.vue'
 import store from '../store/index.js'
