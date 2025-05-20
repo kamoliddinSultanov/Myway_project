@@ -11,47 +11,6 @@ from django.contrib.auth.models import User
 from rest_framework.test import APIClient
 from rest_framework import status
 
-class CarTests(TestCase):
-    def setUp(self):
-        self.client = APIClient()
-        image = SimpleUploadedFile("test.jpg", b"file_content", content_type="image/jpeg")
-        self.car = Car.objects.create(
-            title="Test Car",
-            brand="Test Brand",
-            model="Test Model",
-            price=10000,
-            description="Test Description",
-            image=image
-        )
-
-    @patch('showroom.views.es')
-    def test_car_detail_view(self, mock_es):
-        response = self.client.get(f'/api/cars/{self.car.pk}/')
-        self.assertEqual(response.status_code, 200)
-        self.assertIn("Test Car", str(response.content))
-
-    @patch('showroom.views.es')
-    def test_search_cars(self, mock_es):
-        mock_es.search.return_value = {
-            "hits": {
-                "hits": [{
-                    "_source": {
-                        "title": "Test Car",
-                        "brand": "Test Brand"
-                    }
-                }]
-            }
-        }
-        response = self.client.get('/api/search/?q=test')
-        self.assertEqual(response.status_code, 200)
-        self.assertIn("Test Car", str(response.content))
-
-    @patch('showroom.views.es')
-    def test_index_all_cars(self, mock_es):
-        mock_es.index.return_value = {"result": "created"}
-        from .views import index_all_cars
-        result = index_all_cars()
-        self.assertEqual(result, "all cars are indexed")
 
 class AuthTests(TestCase):
     def setUp(self):

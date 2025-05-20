@@ -192,7 +192,7 @@ class LogoutView(APIView):
 @api_view(['GET'])
 def get_csrf_token(request):
     """
-    Возвращает CSRF токен для фронтенда.
+    returns CSRF token for frontend.
     """
     csrf_token = get_token(request)
     return Response({'csrfToken': csrf_token})
@@ -229,7 +229,7 @@ def request_order(request):
             smtp_server = "smtp.yandex.com"
             smtp_port = 587
             smtp_user = "myway.test@yandex.com"
-            smtp_password = "ckwsbxbedadgqnyg"  # an application password password from yandex mail
+            smtp_password = "ckwsbxbedadgqnyg"  # an application password from yandex mail
 
             
             msg1 = MIMEText(f"Your order is accepted.\nA sales manager will contact you soon.\n\nOrder ID: {order_id}")

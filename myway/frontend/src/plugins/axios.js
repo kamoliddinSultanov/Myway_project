@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-// Устанавливаем базовый URL для всех запросов
+// set base URL for all queries
 axios.defaults.baseURL = 'http://localhost:8000';
-axios.defaults.withCredentials = true; // Включаем передачу cookies
+axios.defaults.withCredentials = true; // cookies
 
-// Настройка CSRF-токена (если используется)
+// Settings CSRF-token
 axios.interceptors.request.use(
   (config) => {
     const csrfToken = document.cookie
