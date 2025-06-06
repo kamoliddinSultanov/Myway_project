@@ -13,7 +13,7 @@
                 ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat.
             </p>
             <div class="grid gap-8 md:grid-cols-2 md:gap-10">
-                <img src="https://assets.website-files.com/6458c625291a94a195e6cf3a/64b7a30c42421ae3cbe5abb9_about%20image.svg" alt="" class="inline-block h-full w-full rounded-2xl object-cover" />
+                <img src="../assets/mywayStore.jpg" alt="" class="inline-block h-full w-full rounded-2xl object-cover" />
                 <div class="flex flex-col gap-5 rounded-2xl border border-solid border-black p-10 sm:p-12">
                     <h2 class="text-3xl font-bold md:text-5xl">Our Mission</h2>
                     <p class="text-sm text-gray-500 sm:text-base">

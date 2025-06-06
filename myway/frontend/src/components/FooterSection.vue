@@ -18,7 +18,7 @@
                 <img src="https://img.icons8.com/fluent/30/000000/instagram-new.png" />
             </a>
         </div>
-        <p class="text-center text-gray-700 font-medium">&copy; 2022 Company Ltd. All rights reservered.</p>
+        <p class="text-center text-gray-700 font-medium">&copy; 2025 Company Ltd. All rights reservered.</p>
     </footer>
 </template>
 <script>

@@ -14,25 +14,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-'''
-from django.contrib import admin
-from django.urls import path, include, re_path
-from django.conf import settings
-from django.conf.urls.static import static
-from django.views.generic import TemplateView
 
-
-urlpatterns = [
-    path('admin/', admin.site.urls),
-    re_path(r'^.*$', TemplateView.as_view(template_name="static/vue/index.html")),
-#    path('showroom/', include('showroom.urls')),
-#    path('', include('showroom.urls')),
-]
-
-# Настройка маршрутов для медиафайлов
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-'''
 from django.contrib import admin
 from django.urls import path, include, re_path
 from django.conf import settings
@@ -44,18 +26,23 @@ from django.views.generic import TemplateView
 from django.views.static import serve
 
 
+from showroom.views import RegisterView, LoginView, LogoutView, UserView
+from showroom.views import GetCSRFToken
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('showroom.urls')),
-    #re_path(r'^.*$', TemplateView.as_view(template_name="vue/index.html")),  # Добавляем маршрут для корневого URL
+    path('api/csrf-token/', GetCSRFToken.as_view(), name='csrf_token'),
+    path('api/register/', RegisterView.as_view(), name='register'),
+    path('api/login/', LoginView.as_view(), name='login'),
+    path('api/logout/', LogoutView.as_view(), name='logout'),
+    path('api/user/', UserView.as_view(), name='user'),
 ]
 
-# Настройка маршрутов для медиафайлов
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-    #urlpatterns += static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS[0])
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-#+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
 
 urlpatterns += [
     re_path(r'^.*$', TemplateView.as_view(template_name="vue/index.html")),

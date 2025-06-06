@@ -17,7 +17,7 @@
             <div class="grid gap-5 sm:grid-cols-2 md:grid-cols-3 md:gap-4">
                 <!-- Features Item -->
                 <div class="grid gap-6 rounded-md border border-solid border-gray-300 p-8 md:p-10 place-items-center">
-                    <img src="https://firebasestorage.googleapis.com/v0/b/flowspark-1f3e0.appspot.com/o/Tailspark%20Images%2FPlaceholder%20Image.svg?alt=media&token=375a1ea3-a8b6-4d63-b975-aac8d0174074" alt="" class="inline-block h-16 w-16 object-cover rounded-full " />
+                    <img src="../assets/support.png" alt="" class="inline-block h-16 w-16 object-cover rounded-full " />
                     <h3 class="text-xl font-semibold">Support</h3>
                     <p class="text-sm text-gray-500">
                         Lorem ipsum dolor sit amet consectetur adipiscing elit ut aliquam,
@@ -26,7 +26,7 @@
                 </div>
                 <!-- Features Item -->
                 <div class="grid gap-6 rounded-md border border-solid border-gray-300 p-8 md:p-10 place-items-center">
-                    <img src="https://firebasestorage.googleapis.com/v0/b/flowspark-1f3e0.appspot.com/o/Tailspark%20Images%2FPlaceholder%20Image.svg?alt=media&token=375a1ea3-a8b6-4d63-b975-aac8d0174074" alt="" class="inline-block h-16 w-16 object-cover rounded-full " />
+                    <img src="../assets/organise.png" alt="" class="inline-block h-16 w-16 object-cover rounded-full " />
                     <h3 class="text-xl font-semibold">Organise</h3>
                     <p class="text-sm text-gray-500">
                         Lorem ipsum dolor sit amet consectetur adipiscing elit ut aliquam,
@@ -35,7 +35,7 @@
                 </div>
                     <!-- Features Item -->
                 <div class="grid gap-6 rounded-md border border-solid border-gray-300 p-8 md:p-10 place-items-center">
-                    <img src="https://firebasestorage.googleapis.com/v0/b/flowspark-1f3e0.appspot.com/o/Tailspark%20Images%2FPlaceholder%20Image.svg?alt=media&token=375a1ea3-a8b6-4d63-b975-aac8d0174074" alt="" class="inline-block h-16 w-16 object-cover rounded-full " />
+                    <img src="../assets/flexibility.png" alt="" class="inline-block h-16 w-16 object-cover rounded-full " />
                     <h3 class="text-xl font-semibold">Flexibility</h3>
                     <p class="text-sm text-gray-500">
                         Lorem ipsum dolor sit amet consectetur adipiscing elit ut aliquam,
@@ -44,7 +44,7 @@
                 </div>
                 <!-- Features Item -->
                 <div class="grid gap-6 rounded-md border border-solid border-gray-300 p-8 md:p-10 place-items-center">
-                    <img src="https://firebasestorage.googleapis.com/v0/b/flowspark-1f3e0.appspot.com/o/Tailspark%20Images%2FPlaceholder%20Image.svg?alt=media&token=375a1ea3-a8b6-4d63-b975-aac8d0174074" alt="" class="inline-block h-16 w-16 object-cover rounded-full " />
+                    <img src="../assets/speed.png" alt="" class="inline-block h-16 w-16 object-cover rounded-full " />
                     <h3 class="text-xl font-semibold">Speed</h3>
                     <p class="text-sm text-gray-500">
                         Lorem ipsum dolor sit amet consectetur adipiscing elit ut aliquam,
@@ -53,7 +53,7 @@
                 </div>
                 <!-- Features Item -->
                 <div class="grid gap-6 rounded-md border border-solid border-gray-300 p-8 md:p-10 place-items-center">
-                    <img src="https://firebasestorage.googleapis.com/v0/b/flowspark-1f3e0.appspot.com/o/Tailspark%20Images%2FPlaceholder%20Image.svg?alt=media&token=375a1ea3-a8b6-4d63-b975-aac8d0174074" alt="" class="inline-block h-16 w-16 object-cover rounded-full " />
+                    <img src="../assets/quality.png" alt="" class="inline-block h-16 w-16 object-cover rounded-full " />
                     <h3 class="text-xl font-semibold">Quality</h3>
                     <p class="text-sm text-gray-500">
                         Lorem ipsum dolor sit amet consectetur adipiscing elit ut aliquam,
@@ -62,7 +62,7 @@
                 </div>
                 <!-- Features Item -->
                 <div class="grid gap-6 rounded-md border border-solid border-gray-300 p-8 md:p-10 place-items-center">
-                    <img src="https://firebasestorage.googleapis.com/v0/b/flowspark-1f3e0.appspot.com/o/Tailspark%20Images%2FPlaceholder%20Image.svg?alt=media&token=375a1ea3-a8b6-4d63-b975-aac8d0174074" alt="" class="inline-block h-16 w-16 object-cover rounded-full " />
+                    <img src="../assets/resource.png" alt="" class="inline-block h-16 w-16 object-cover rounded-full " />
                     <h3 class="text-xl font-semibold">Resource</h3>
                     <p class="text-sm text-gray-500">
                         Lorem ipsum dolor sit amet consectetur adipiscing elit ut aliquam,

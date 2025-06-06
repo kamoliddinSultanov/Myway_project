@@ -29,3 +29,6 @@ def update_car_in_es(sender, instance, **kwargs):
 @receiver(post_delete, sender=Car)
 def delete_car_from_es(sender, instance, **kwargs):
     es.delete(index="cars", id=instance.id)
+
+from elasticsearch import Elasticsearch
+es = Elasticsearch(hosts=["http://localhost:9200"])

@@ -1,4 +1,5 @@
 const { defineConfig } = require('@vue/cli-service')
+const path = require('path')
 module.exports = defineConfig({
   transpileDependencies: true,
   devServer: {
@@ -8,10 +9,19 @@ module.exports = defineConfig({
         changeOrigin: true,
       },
       '/elasticsearch': {
-        target: 'http://localhost:9200', // Прокси на сервер Elasticsearch
+        target: 'http://localhost:9200',
         changeOrigin: true,
-        pathRewrite: { '^/elasticsearch': '' } // Уберите префикс /elasticsearch из пути
+        pathRewrite: { '^/elasticsearch': '' }
       },
     },
   },
+
+  configureWebpack: {
+    resolve: {
+      alias: {
+        '@': path.resolve(__dirname, 'src'),
+        '@components': path.resolve(__dirname, 'src/components')
+      }
+    }
+  }
 })
